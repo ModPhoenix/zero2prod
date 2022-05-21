@@ -13,12 +13,18 @@ path = "src/main.rs"
 name = "zero2prod"
 
 [dependencies]
-actix-web = "=4.0.0-beta.8"
-actix-http = "=3.0.0-beta.8"
-serde = { version = "1.0.127", features = ["derive"]}
-config = "0.11.0"
+actix-web = "4.0.1"
+actix-http = "3.0.4"
+tracing-actix-web = "0.5"
+serde = { version = "1.0.137", features = ["derive"]}
+config = "0.13.1"
 uuid = { version = "0.8.2", features = ["v4"] }
 chrono = "0.4.19"
+tracing = { version = "0.1", features = ["log"] }
+tracing-log = "0.1"
+tracing-subscriber = { version = "0.3", features = ["registry", "env-filter"] }
+tracing-bunyan-formatter = "0.3"
+secrecy = { version = "0.8", features = ["serde"] }
 
 [dependencies.sqlx]
 version = "0.5.7"
@@ -32,7 +38,11 @@ features = [
   "migrate"
 ]
 
+[profile.dev.package.sqlx-macros]
+opt-level = 3
+
 [dev-dependencies]
-tokio = "1.9.0"
-actix-rt = "2.2.0"
-reqwest = "0.11.4"
+tokio = "1.18.2"
+actix-rt = "2.7.0"
+reqwest = "0.11.10"
+once_cell = "1"
